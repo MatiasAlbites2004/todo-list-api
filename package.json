@@ -1,0 +1,33 @@
+{
+  "name": "todo-list-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatiasAlbites2004/todo-list-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatiasAlbites2004/todo-list-api/issues"
+  },
+  "homepage": "https://github.com/MatiasAlbites2004/todo-list-api#readme",
+  "dependencies": {
+    "@prisma/client": "^6.16.2",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.2",
+    "prisma": "^6.16.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  }
+}
