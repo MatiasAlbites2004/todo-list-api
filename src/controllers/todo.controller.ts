@@ -9,7 +9,9 @@ export const getToDos = async (req: Request, res: Response) => {
     res.status(StatusCodes.OK).json(todos);
   } catch (error) {
     console.error(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Error fetching todos" });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: "Error fetching todos" });
   }
 };
 
@@ -17,13 +19,22 @@ export const createToDo = async (req: Request, res: Response) => {
   try {
     const validatedData = createTodoSchema.parse(req.body);
 
+    if (!validatedData.userId) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: "El userId es obligatorio" });
+    }
+
     const todo = await todoService.createTodo(validatedData);
+
     res.status(StatusCodes.CREATED).json(todo);
   } catch (error: any) {
     if (error.name === "ZodError") {
       return res.status(StatusCodes.BAD_REQUEST).json({ errors: error.errors });
     }
     console.error(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Error creating To-Do" });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: "Error creating To-Do" });
   }
 };
