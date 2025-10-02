@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import * as todoService from "../services/todo.service";
 import { StatusCodes } from "http-status-codes";
 import { createTodoSchema } from "../schemas/todo.schema";
+import { AuthRequest } from "../middlewares/auth.middleware";
 
 export const getToDos = async (req: Request, res: Response) => {
   try {
@@ -15,17 +16,13 @@ export const getToDos = async (req: Request, res: Response) => {
   }
 };
 
-export const createToDo = async (req: Request, res: Response) => {
+export const createToDo = async (req: AuthRequest, res: Response) => {
   try {
     const validatedData = createTodoSchema.parse(req.body);
 
-    if (!validatedData.userId) {
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ error: "El userId es obligatorio" });
-    }
+    const userId = req.user!.id;
 
-    const todo = await todoService.createTodo(validatedData);
+    const todo = await todoService.createTodo({ ...validatedData, userId });
 
     res.status(StatusCodes.CREATED).json(todo);
   } catch (error: any) {

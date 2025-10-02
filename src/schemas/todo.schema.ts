@@ -3,5 +3,6 @@ import { z } from "zod";
 export const createTodoSchema = z.object({
   title: z.string().min(1, "El título es obligatorio"),
   description: z.string().optional(),
-  userId: z.number().int().positive("El userId debe ser un número válido"),
 });
+
+export type CreateTodoInput = z.infer<typeof createTodoSchema>;
