@@ -1,9 +1,10 @@
-import { Router } from "express";
-import * as todoController from "../controllers/todo.controller";
+import express from "express";
+import { getToDos, createToDo } from "../controllers/todo.controller";
+import { authenticate } from "../middlewares/auth.middleware";
 
-const router = Router();
+const router = express.Router();
 
-router.get("/to-do", todoController.getToDos);
-router.post("/to-do", todoController.createToDo);
+router.get("/", authenticate, getToDos);   
+router.post("/", authenticate, createToDo); 
 
 export default router;
