@@ -6,10 +6,11 @@ import authRoutes from "./routes/auth.routes";
 const app = express();
 const PORT = 3000;
 
-
-app.use(cors({
-  origin: "http://localhost:5173",
-}));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use(express.json());
 
