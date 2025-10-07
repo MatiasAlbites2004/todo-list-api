@@ -1,4 +1,3 @@
--- CreateTable
 CREATE TABLE "public"."ToDo" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
