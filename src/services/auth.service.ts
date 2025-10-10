@@ -1,9 +1,10 @@
 import prisma from "../../prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { config } from "../config/config";
 
-const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
-const JWT_EXPIRES_IN = "1h";
+const JWT_SECRET = config.jwtSecret;
+const JWT_EXPIRES_IN = config.jwtExpiresIn;
 
 export const registerUser = async (
   name: string,
