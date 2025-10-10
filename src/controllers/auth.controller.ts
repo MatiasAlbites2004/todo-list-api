@@ -5,9 +5,10 @@ import { registerUser, loginUser } from "../services/auth.service";
 import { ZodError } from "zod";
 import jwt from "jsonwebtoken";
 import prisma from "../../prisma/client";
+import { config } from "../config/config";
 
-const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
-const JWT_EXPIRES_IN = "1h";
+const JWT_SECRET = config.jwtSecret;
+const JWT_EXPIRES_IN = config.jwtExpiresIn;
 
 export const register = async (req: Request, res: Response) => {
   try {
